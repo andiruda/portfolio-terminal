@@ -1,0 +1,41 @@
+div.ui.pointing.secondary.menu {
+  background-color: #343a44;
+}
+
+div.ui.pointing.secondary.menu a {
+  border-radius: 0px 5px 0px 0px;
+    border-top: solid 1px #282c34;
+    border-right: solid 1px #282c34;
+    color: whitesmoke;
+}
+
+
+/*ul {
+  display:flex;
+  flex-wrap: wrap;
+}
+
+div.ui.card {
+  margin: .5rem;
+  padding: .5rem;
+}
+
+div.ui.card:first-child {
+  margin-top: .5rem
+}
+
+div.ui.card>.extra {
+  font-size: small;
+  display: flex;
+  margin: auto;
+}
+
+div.ui.card>.extra .item {
+  display: inline-flex;
+  margin: 0 .5rem;
+}
+
+div.ui.card .meta {
+  font-size: 1rem;
+  margin: .5rem;
+}*/
