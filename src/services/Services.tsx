@@ -5,6 +5,12 @@ export function RunCommand(cmd:any, client:any = {}) {
     case 'start' :
     case 'init' : 
     retVal = `
+─█───█───███───████─
+─█───█──█──────█────
+─█───█──█──██──████─
+─█───█──█───█──█────
+──███────███───█────
+
 UNITED GALACTIC FEDERATION
 
 UGF Y-2336 Federation of Citizens Registry.

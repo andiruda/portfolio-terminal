@@ -80,7 +80,7 @@ export default function Terminal(props:any) {
           printOut = `${printOut}${char}`;
           setBuffer([...buffer, ...[printOut]]);
           return resolve(char);
-        }, 10 * idx);
+        }, 5 * idx);
       });
     });
     Promise.all(promises)
