@@ -48,6 +48,7 @@ div#inputMain:focus {
 }
 
 div#inputMain, ul#buffer li .inputTxt { 
+  cursor: none;
   color: transparent;
   text-shadow: 0 0 0 whitesmoke;
   position: relative;
