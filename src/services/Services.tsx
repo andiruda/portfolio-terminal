@@ -5,15 +5,15 @@ export function RunCommand(cmd:any, client:any = {}) {
     case 'start' :
     case 'init' : 
     retVal = `
+────────────────────
 ─█───█───███───████─
 ─█───█──█──────█────
-─█───█──█──██──████─
-─█───█──█───█──█────
-──███────███───█────
+─█───█──█──██──████─ UNITED
+─█───█──█───█──█──── GALACTIC
+──███────███───█──── FEDERATION
+────────────────────
+UGF of Registry Citizens. (Y-2336)
 
-UNITED GALACTIC FEDERATION
-
-UGF Y-2336 Federation of Citizens Registry.
 TERMINAL CLIENT
     Registered : UGF-FCR-007-00023
     Sector : Terra
