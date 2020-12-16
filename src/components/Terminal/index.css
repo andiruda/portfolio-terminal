@@ -29,6 +29,16 @@ body {
   font-size: 1.2rem;
 }
 
+#buffer .wrap pre {
+  width: 100vw;
+  white-space: pre-wrap;
+}
+
+#buffer .wrap pre.clientString {
+  width: auto;
+  white-space: nowrap;
+}
+
 .clientString {
   color: #2196f3;
 }
