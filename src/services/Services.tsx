@@ -35,8 +35,3 @@ TERMINAL CLIENT
   }
   return `${retVal}\n`;
 }
-
-// export function PrintOut(str:string) {
-//   const timePerChar = 2000;
-  
-// }
