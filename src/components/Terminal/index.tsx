@@ -50,10 +50,10 @@ export default function Terminal(props:any) {
 
   useEffect(() => {
     document.getElementById("inputMain")?.focus();
-    fetch(`http://www.geoplugin.net/json.gp`)
+    fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ff2bca4bbf144d858a8ea8801d6e1375')
       .then(res => res.json())
       .then(result => {
-          // console.log(result);
+          console.log(result);
           setClient(result);
           setIsLoaded(true);
         },
@@ -109,7 +109,6 @@ export default function Terminal(props:any) {
       Object.keys(tmpInput).forEach((str) => tmpInput[str].action = 'keyup')
     }
     
-    
     e.preventDefault();
     if (!e.key || (tmpInput[e.key] && e.type !== 'keyup')) return;
     
@@ -137,7 +136,7 @@ export default function Terminal(props:any) {
         }
         setHideInput(true);
         const msg = RunCommand(input, client);
-        const newLines = [client.geoplugin_request + SEP + input];
+        const newLines = [client.ip + SEP + input];
         setBuffer([...buffer, ...newLines]);
         setResponse(msg);
         value = '';
@@ -146,7 +145,7 @@ export default function Terminal(props:any) {
         if (buffer.length > 1) {
           const upScrollPtr = scrollPtr - 2;
           if (!buffer[upScrollPtr]) break;
-          value = buffer[upScrollPtr].replace(client.geoplugin_request, '').replace(SEP, '');
+          value = buffer[upScrollPtr].replace(client.ip, '').replace(SEP, '');
           setScrollPtr(upScrollPtr);
         }
         break;
@@ -154,7 +153,7 @@ export default function Terminal(props:any) {
         if (buffer.length > 1 && scrollPtr < buffer.length) {
           const downScrollPtr = scrollPtr + 2;
           if (!buffer[downScrollPtr]) break;
-          value = buffer[downScrollPtr].replace(client.geoplugin_request, '').replace(SEP, '');
+          value = buffer[downScrollPtr].replace(client.ip, '').replace(SEP, '');
           setScrollPtr(downScrollPtr);
         }
         break;
@@ -185,7 +184,7 @@ export default function Terminal(props:any) {
   } else if(!isLoaded) {
     return <div>Loading...</div>
   } else {
-    const clientString = `${client.geoplugin_request}${SEP}`;
+    const clientString = `${client.ip}${SEP}`;
     return (
       
         <div id="container" onClick={handleClick}>

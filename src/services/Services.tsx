@@ -7,23 +7,23 @@ export function RunCommand(cmd:any, client:any = {}) {
     retVal = `
 ────────────────────
 ─█───█───███───████─
-─█───█──█──────█────
-─█───█──█──██──████─ UNITED
-─█───█──█───█──█──── GALACTIC
-──███────███───█──── FEDERATION
+─█───█──█──────█──── UNITED
+─█───█──█──██──████─ GALACTIC
+─█───█──█───█──█──── FEDERATION
+──███────███───█────
 ────────────────────
-UGF of Registry Citizens. (Y-2336)
+UGF Registry of Citizens. (Y-2336)
 
 TERMINAL CLIENT
-    Registered : UGF-FCR-007-00023
+    Registered : UGF-RoC-007-00023
     Sector : Terra
-    Unit : ${client.geoplugin_continentName}
-    Lat : ${client.geoplugin_latitude}
-    Long : ${client.geoplugin_longitude}
+    Unit : ${client.continent_name}, ${client.country_name}, ${client.district}
+    Lat : ${client.latitude}
+    Long : ${client.longitude}
     Node : 0023
     Uptime : ${Math.floor(Math.random()*10000)}ms
     Latency : ~ ${Math.floor(Math.random()*10)}ms
-    Local Access Point : ${client.geoplugin_request}
+    Local Access Point : ${client.ip}
     `
       break;
     case 'help' : 
