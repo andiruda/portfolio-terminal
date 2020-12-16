@@ -53,7 +53,6 @@ export default function Terminal(props:any) {
     fetch('https://api.ipgeolocation.io/ipgeo?apiKey=ff2bca4bbf144d858a8ea8801d6e1375')
       .then(res => res.json())
       .then(result => {
-          console.log(result);
           setClient(result);
           setIsLoaded(true);
         },
