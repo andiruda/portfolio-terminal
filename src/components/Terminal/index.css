@@ -18,7 +18,7 @@ body {
   width: 100vw;
   display: grid;
   grid-template-columns: min-content 1fr;
-  column-gap: .2terem;
+  column-gap: .2rem;
   justify-items: stretch;
   padding: .3rem 1rem;
 }
@@ -30,7 +30,7 @@ body {
 }
 
 #buffer .wrap pre {
-  width: 100vw;
+  width: calc(100vw - 1.2rem);
   white-space: pre-wrap;
 }
 

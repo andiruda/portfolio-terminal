@@ -1,7 +1,7 @@
 
 export function RunCommand(cmd:any, client:any = {}) {
   let retVal = '';
-  switch (cmd) {
+  switch (cmd.toLowerCase()) {
     case 'start' :
     case 'init' : 
     retVal = `
