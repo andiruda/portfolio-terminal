@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import { servicesVersion } from 'typescript';
 import { RunCommand } from '../../services/Services';
 import './index.css';
 
-// import { FirebaseContext } from '../Firebase';
 import { StoreContext } from '../../utilities/store';
 
 const SEP = ' ~ $ ';
@@ -12,11 +10,10 @@ function History(props:any) {
   const { buffer: [ buffer ] } = useContext(StoreContext);
   
   const list = buffer.map((row:any, idx:number) => {
-  
     const userInfo = row.split(SEP);
     return (
       <li className="wrap" key={idx}>
-        <pre className={(userInfo.length > 1) ? 'clientString' : ''}>
+        <pre className={(userInfo.length > 1) ? 'clientString' : 'responseOutput'}>
           {userInfo[0]}
           {userInfo.length > 1 && SEP}
         </pre>
@@ -39,14 +36,12 @@ export default function Terminal(props:any) {
   const [ client, setClient ]: any = useState(null);
   const [ input, setInput ]: any = useState('');
   const [ tmpInput, setTmpInput ]: any = useState({});
-  const [ hideInput, setHideInput ]: any = useState(false);
+  const [ hideInput, setHideInput ]: any = useState(true);
   
   const { buffer: [ buffer, setBuffer ] } = useContext(StoreContext);
   
   const [ response, setResponse ] = useState('');
   const [ scrollPtr, setScrollPtr ] = useState(0);
-
-  // const commands = useContext(FirebaseContext);
 
   useEffect(() => {
     document.getElementById("inputMain")?.focus();
@@ -65,35 +60,43 @@ export default function Terminal(props:any) {
 
   useEffect(() => {
     if (!client) return;
-    setHideInput(true);
     setResponse(RunCommand('init',client));
   },[client])
 
   useEffect(() => {
     if (!response) return;
-    let printOut = '';
+
     const responseAry = response.split('');
-    const promises = responseAry.map((char, idx) => {
-      return new Promise((resolve, reject) => {
-        return setTimeout(() => {
-          printOut = `${printOut}${char}`;
-          setBuffer([...buffer, ...[printOut]]);
-          return resolve(char);
-        }, 5 * idx);
-      });
+    let timePtr = 5;
+    let tmpBuffer = '';
+
+    responseAry.forEach((char: string, idx: number) => {
+      if (char === '^') timePtr += 1000;
+      else timePtr += 5;
+      setTimeout(() => {
+        if (char === '^') return;
+        tmpBuffer += char;
+        setBuffer([...buffer, ...[tmpBuffer]]);
+        if (idx === responseAry.length - 1) {
+          setHideInput(false);
+        }
+      }, timePtr)
     });
-    Promise.all(promises)
-      .then((resp:any) => {
-        const newBuffer = [...buffer, ...[resp.join('')]];
-        setBuffer(newBuffer);
-        setResponse('');
-        setHideInput(false);
-        setScrollPtr(buffer.length + 1);
-      });
+    
+    setResponse('');
+    setScrollPtr(buffer.length + 1);
+
   },[response]);
 
   useEffect(() => {
-    if(!hideInput) document.getElementById("inputMain")?.focus();
+    if(!hideInput) {
+      document.getElementById("inputMain")?.focus();
+      const outputs = document.getElementsByClassName('responseOutput');
+      if (outputs.length > 0) {
+        let elem = outputs[outputs.length - 1];
+        elem.classList.remove('responseOutput');
+      }
+    }
   },[hideInput]);
 
   const handleKey = (e:any) => {
@@ -162,7 +165,6 @@ export default function Terminal(props:any) {
         value = '';
         break;
       case /shift/ : 
-        // console.log("shift");
         break;
       default :
         value = input + key.replace(/shift|control|enter|alt|command|backspace/gi,'');
@@ -185,7 +187,6 @@ export default function Terminal(props:any) {
   } else {
     const clientString = `${client.ip}${SEP}`;
     return (
-      
         <div id="container" onClick={handleClick}>
           <History buffer={buffer}></History>
           <div className="wrap">
@@ -193,7 +194,6 @@ export default function Terminal(props:any) {
           {!hideInput && <div id="inputMain" contentEditable="true" onKeyDown={handleKey} onKeyUp={handleKey}></div>}
           </div>
         </div>
-      
     );
   }
 }
