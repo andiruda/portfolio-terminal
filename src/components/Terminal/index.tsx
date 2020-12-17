@@ -8,6 +8,12 @@ const SEP = ' ~ $ ';
 
 function History(props:any) {
   const { buffer: [ buffer ] } = useContext(StoreContext);
+
+  //Automated scrolling
+  useEffect(() => {
+    let elem = document.querySelector("#container");
+    if (elem) elem.scrollTo(0,elem.scrollHeight);
+  });
   
   const list = buffer.map((row:any, idx:number) => {
     const userInfo = row.split(SEP);
